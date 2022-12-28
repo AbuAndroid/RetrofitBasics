@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
 class RecyclerAdapter(private val newsList: List<Article>) :RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
@@ -23,11 +26,15 @@ class RecyclerAdapter(private val newsList: List<Article>) :RecyclerView.Adapter
         val itemsPosition = newsList[position]
         holder.uiTvNewsTitle?.text = itemsPosition.title
         holder.uiTvNewsName?.text= itemsPosition.author
-//        holder.uiIvNewsImage.setImageResource(itemsPosition.urlToImage)
+        holder.uiIvNewsImage?.let {
+            Glide.with(it).load(itemsPosition.urlToImage).apply(RequestOptions().diskCacheStrategy(
+                DiskCacheStrategy.ALL)).into(holder.uiIvNewsImage)
+        }
         holder.uiTvNewsDescription?.text = itemsPosition.description
     }
 
     override fun getItemCount(): Int {
+
         return newsList.size
     }
 }

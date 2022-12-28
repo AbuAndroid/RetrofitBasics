@@ -19,14 +19,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter:RecyclerAdapter
     lateinit var recyclerview : RecyclerView
     lateinit var quotesApi: QuotesApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setUpUi()
-        quotesApi = Retrofithelper.getInstance().create(QuotesApi::class.java)
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        setUpRecyclerView()
         GlobalScope.launch(Dispatchers.Main) {
+            quotesApi = Retrofithelper.getInstance().create(QuotesApi::class.java)
             result = quotesApi.getMyQuotes(COUNTRY,CATEGORY,API_KEY).body()?.articles
             adapter = result?.let { RecyclerAdapter(it) }!!
             adapter.notifyDataSetChanged()
@@ -34,8 +35,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setUpUi() {
         recyclerview = findViewById(R.id.uiRvRecyclerView)
     }
 
+    private fun setUpRecyclerView() {
+        recyclerview.setHasFixedSize(true)
+        recyclerview.layoutManager = LinearLayoutManager(this)
+    }
 }
