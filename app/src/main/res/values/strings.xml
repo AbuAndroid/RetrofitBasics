@@ -3,4 +3,5 @@
     <string name="str_newstitle">newstitle</string>
     <string name="str_newsname">newsname</string>
     <string name="str_newsdescription">description</string>
+    <string name="str_text_news">TextView</string>
 </resources>

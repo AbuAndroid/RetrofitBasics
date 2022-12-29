@@ -1,4 +1,4 @@
-package com.example.coroutineexamples
+package com.example.myapplication.Network
 
 import com.example.myapplication.Constants.Companion.BASE_URL
 import retrofit2.Retrofit

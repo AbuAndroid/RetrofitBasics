@@ -1,9 +1,7 @@
-package com.example.coroutineexamples
+package com.example.myapplication.Network
 
-import com.example.myapplication.Article
-import com.example.myapplication.MyNewsData
+import com.example.myapplication.Models.MyNewsData
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 

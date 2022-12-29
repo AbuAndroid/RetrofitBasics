@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/uicard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="5dp"
         app:cardBackgroundColor="@color/design_default_color_surface"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,19 +18,31 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/uiIvNewsImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiTvNewsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
                 android:padding="5dp"
-
                 android:text="@string/str_newstitle"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/uiIvNewsImage"
+                app:layout_constraintTop_toBottomOf="@+id/uiIvNewsImage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiTvNewsName"
@@ -44,29 +55,39 @@
 
                 />
 
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/uiIvNewsImage"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:padding="5dp"
-                app:layout_constraintStart_toStartOf="@+id/uiTvNewsName"
-                app:layout_constraintTop_toBottomOf="@+id/uiTvNewsName"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiTvNewsDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="@string/str_newsdescription"
-                app:layout_constraintStart_toStartOf="@+id/uiIvNewsImage"
-                app:layout_constraintTop_toBottomOf="@+id/uiIvNewsImage"
+                app:layout_constraintStart_toStartOf="@+id/uiTvNewsName"
+                app:layout_constraintTop_toBottomOf="@+id/uiTvNewsName"
 
                 />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/uiTvNewsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_text_news"
+                app:layout_constraintTop_toBottomOf="@+id/uiTvNewsDescription"
+                app:layout_constraintStart_toStartOf="@+id/uiTvNewsDescription"
+                app:layout_constraintEnd_toEndOf="@+id/uiTvNewsDescription"
+                 />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintTop_toBottomOf="@+id/uicard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

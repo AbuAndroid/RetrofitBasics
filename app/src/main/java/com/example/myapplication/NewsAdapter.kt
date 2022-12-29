@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.myapplication.Models.Article
+import com.example.myapplication.customextensions.getDateAndMonth
 
 class NewsAdapter(
     private val newsList: MutableList<Article>,
@@ -17,7 +19,8 @@ class NewsAdapter(
     ) :RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_layout,parent,false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.recycler_layout,parent,false)
         return ViewHolder(view)
     }
 
@@ -26,10 +29,14 @@ class NewsAdapter(
         holder.uiTvNewsTitle?.text = itemsPosition.title
         holder.uiTvNewsName?.text= itemsPosition.author
         holder.uiIvNewsImage?.let {
-            Glide.with(it).load(itemsPosition.urlToImage).apply(RequestOptions().diskCacheStrategy(
-                DiskCacheStrategy.ALL)).into(holder.uiIvNewsImage)
+            Glide.with(it)
+                .load(itemsPosition.urlToImage)
+                .apply(RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(holder.uiIvNewsImage)
         }
         holder.uiTvNewsDescription?.text = itemsPosition.description
+        holder.uiTvNewsDate?.text = itemsPosition.publishedAt?.getDateAndMonth()
     }
 
     override fun getItemCount(): Int {
@@ -48,9 +55,13 @@ class NewsAdapter(
         val uiTvNewsName:TextView? = itemView.findViewById(R.id.uiTvNewsName)
         val uiIvNewsImage: ImageView? = itemView.findViewById(R.id.uiIvNewsImage)
         val uiTvNewsDescription:TextView? = itemView.findViewById(R.id.uiTvNewsDescription)
+        val uiTvNewsDate : TextView? = itemView.findViewById(R.id.uiTvNewsDate)
 
         init {
-            uiTvNewsTitle?.setOnClickListener{onItemClick(newsList[adapterPosition])}
+            itemView.setOnClickListener{
+//                onItemClick(newsList[adapterPosition])
+                onItemClick(newsList[adapterPosition])
+            }
         }
 
     }

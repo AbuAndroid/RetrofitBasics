@@ -7,31 +7,33 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import org.w3c.dom.Text
+import com.example.myapplication.Models.Article
 
 class NewsActivity : AppCompatActivity() {
     var uiTvTitle:TextView? = null
     var uiTvName:TextView?=null
     var uiIvimage:ImageView? = null
     var uiTvDescription:TextView? = null
+
+    companion object{
+        val ARTICLE_NAME = "article"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
         setUpUi()
-        val title = intent.getStringExtra("title")
-        val name = intent.getStringExtra("name")
-        val image = intent.getStringExtra("image")
-        val description = intent.getStringExtra("description")
+        val myIntent = intent
+        val article = myIntent.getParcelableExtra<Article>(ARTICLE_NAME)
 
-        uiTvName?.text = name
-        uiTvTitle?.text = title
+       uiTvName?.text = article?.author.toString()
+        uiTvTitle?.text = article?.title.toString()
         uiIvimage?.let {
-            Glide.with(it).load(image).apply(
+            Glide.with(it).load(article?.urlToImage.toString()).apply(
                 RequestOptions().diskCacheStrategy(
                 DiskCacheStrategy.ALL)).into(uiIvimage!!)
         }
-        uiTvDescription?.text = description
+        uiTvDescription?.text = article?.description.toString()
     }
 
     private fun setUpUi() {

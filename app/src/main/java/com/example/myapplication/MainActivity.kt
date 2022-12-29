@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coroutineexamples.Retrofithelper
+import com.example.myapplication.Network.Retrofithelper
 import com.example.myapplication.Constants.Companion.API_KEY
 import com.example.myapplication.Constants.Companion.CATEGORY
 import com.example.myapplication.Constants.Companion.COUNTRY
+import com.example.myapplication.Models.Article
+import com.example.myapplication.Models.MyNewsData
+import com.example.myapplication.NewsActivity.Companion.ARTICLE_NAME
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter(
             newsList = arrayListOf(),
-            onItemClick = ::showDataToNewActivity
+            onItemClick = this::makeToast
         )
     }
     private var recyclerview :RecyclerView? = null
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setUpUi()
         getNewsFromServer()
     }
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getNewsFromServer(){
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.Main) {
             val news = Retrofithelper.newsInstance.getMyQuotes(COUNTRY, CATEGORY, API_KEY)
             news.enqueue(object : Callback<MyNewsData> {
                 override fun onResponse(call: Call<MyNewsData>, response: Response<MyNewsData>) {
@@ -49,8 +51,6 @@ class MainActivity : AppCompatActivity() {
                     if (news != null) {
                         news.articles?.let { newsAdapter.onNewsListChanged(it) }
                     }
-
-                    Log.d("fjkjk",news?.articles.toString())
                 }
 
                 override fun onFailure(call: Call<MyNewsData?>, t: Throwable) {
@@ -63,22 +63,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDataToNewActivity(article: Article){
-
-        val newlist:ArrayList<Article> = arrayListOf<Article>()
-        newlist.addAll(listOf(article))
-        val title = article.title
-        val name = article.author
-        val image = article.urlToImage
-        val decription = article.description
-
-        val bundle = Bundle()
-        bundle.putStringArrayList("list",newlist)
-        val intent = Intent(this,NewsActivity::class.java)
-        intent.putExtra("title",article)
-        intent.putExtra("name",name)
-        intent.putExtra("image",image)
-        intent.putExtra("description",decription)
-
+        val intent = Intent(this@MainActivity,NewsActivity::class.java)
+        intent.putExtra(ARTICLE_NAME,article)
+        Log.d("dd",article.toString())
         startActivity(intent)
     }
     private fun makeToast(article: Article) {
