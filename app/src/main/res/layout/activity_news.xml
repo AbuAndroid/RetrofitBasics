@@ -16,47 +16,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiNewsTvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:gravity="center_horizontal"
-                android:text="TextView"
+                android:text="@string/str_title"
                 android:textAlignment="center"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/uiNewsTvName"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/uiTvNewsName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:text="TextView"
+                android:text="@string/str_news_name"
                 android:textAlignment="center" />
 
-            <ImageView
-                android:id="@+id/uiNewsIvimage"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/uiIvNewsImage"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginTop="50dp"
+                tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/uiNewsTvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="TextView"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:text="@string/str_news_description"
+                android:textSize="16sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

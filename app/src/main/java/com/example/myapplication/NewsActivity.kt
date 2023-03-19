@@ -10,13 +10,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.Models.Article
 
 class NewsActivity : AppCompatActivity() {
-    var uiTvTitle:TextView? = null
-    var uiTvName:TextView?=null
-    var uiIvimage:ImageView? = null
-    var uiTvDescription:TextView? = null
+    private var uiTvTitle:TextView? = null
+    private var uiTvName:TextView?=null
+    private var uiIvImage:ImageView? = null
+    private var uiTvDescription:TextView? = null
 
     companion object{
-        val ARTICLE_NAME = "article"
+        const val ARTICLE_NAME = "article"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +28,18 @@ class NewsActivity : AppCompatActivity() {
 
        uiTvName?.text = article?.author.toString()
         uiTvTitle?.text = article?.title.toString()
-        uiIvimage?.let {
+        uiIvImage?.let {
             Glide.with(it).load(article?.urlToImage.toString()).apply(
                 RequestOptions().diskCacheStrategy(
-                DiskCacheStrategy.ALL)).into(uiIvimage!!)
+                DiskCacheStrategy.ALL)).into(uiIvImage!!)
         }
         uiTvDescription?.text = article?.description.toString()
     }
 
     private fun setUpUi() {
         uiTvTitle = findViewById(R.id.uiNewsTvTitle)
-        uiTvName = findViewById(R.id.uiNewsTvName)
-        uiIvimage = findViewById(R.id.uiNewsIvimage)
+        uiTvName = findViewById(R.id.uiTvNewsName)
+        uiIvImage = findViewById(R.id.uiIvNewsImage)
         uiTvDescription = findViewById(R.id.uiNewsTvDescription)
     }
 }

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.Models.Article
-import com.example.myapplication.customextensions.getDateAndMonth
+
 
 class NewsAdapter(
     private val newsList: MutableList<Article>,
@@ -36,7 +36,7 @@ class NewsAdapter(
                 .into(holder.uiIvNewsImage)
         }
         holder.uiTvNewsDescription?.text = itemsPosition.description
-        holder.uiTvNewsDate?.text = itemsPosition.publishedAt?.getDateAndMonth()
+        holder.uiTvNewsDate?.text = itemsPosition.publishedAt
     }
 
     override fun getItemCount(): Int {
@@ -59,7 +59,6 @@ class NewsAdapter(
 
         init {
             itemView.setOnClickListener{
-//                onItemClick(newsList[adapterPosition])
                 onItemClick(newsList[adapterPosition])
             }
         }
